@@ -32,16 +32,13 @@ app.get('/', (req, res) => {
 app.post('/signin', (req, res) => {
     if (req.body.email === database[0].email &&
         req.body.password === database[0].password) {
-        res.json('success');
+        res.json(database[0]);
     } else {
         res.status(400).json('error logging in');
     }
 })
 
 app.post("/register", (req, res) => {
-	bcrypt.hash(req.body.password, null, null, function(err, hash) {
-    console.log(hash);
-});
     const newUser = {
         "id": (Math.floor((Math.random() * 100000) + 1)).toString(),
         "name": req.body.name,

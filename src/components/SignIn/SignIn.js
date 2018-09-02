@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 
-class signIn extends Component {
+class SignIn extends Component {
 	state = {
 		signInEmail: '',
 		signInPassword: ''
@@ -24,10 +24,11 @@ class signIn extends Component {
 			})
 		})
 			.then(res => res.json())
-			.then(data => {
-				if(data === 'success'){
-				this.props.onRouteChange('home')
-				}
+     	.then(user => {
+        if(user.id){
+          this.props.loadUser(user);
+          this.props.onRouteChange('home');
+        }
 			})
 	}
 
@@ -82,4 +83,4 @@ class signIn extends Component {
 	</article>
 	)}
 }
-export default signIn;
+export default SignIn;
