@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "clarifai": "^2.8.1",
+    "knex": "^0.15.2",
+    "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-particles-js": "^2.3.0",
