@@ -26,12 +26,11 @@ const particleParams = {
   }
 }
 
-class App extends Component {
-  state = {
-    input:'',
-    imageUrl:'',
-    box:{},
-    route:'signIn',
+const initialState = {
+    input: '',
+    imageUrl: '',
+    box: {},
+    route: 'signIn',
     isSignedIn: false,
     user: {
         id: '',
@@ -40,8 +39,11 @@ class App extends Component {
         entries: 0,
         joined: ''
     }
-  }
+}
 
+class App extends Component {
+  state = initialState;
+  
   loadUser = data => {
     const newUser = {
       id: data.id,
@@ -82,7 +84,7 @@ class App extends Component {
       this.state.input)
     .then(response => {
       if (response) {
-        fetch('http://localhost:3000/image', {
+        fetch('http://localhost:3005/image', {
         method: 'put',
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -95,6 +97,7 @@ class App extends Component {
           user.entries = count;
           this.setState({user:user});
         }) 
+        .catch(console.log)
       }
       this.displayFaceBox(this.calculateFaceLocation (response))
     })
@@ -103,7 +106,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn:false})
+      this.setState(initialState)
     } else if (route === 'home') {
       this.setState({isSignedIn: true});
     }
