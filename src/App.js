@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navigation from './components/Navigation/Navigation'
-import SignIn from './components/SignIn/SignIn'
-import Register from './components/Register/Register'
-import Logo from './components/Logo/Logo'
+import Navigation from './components/Navigation/Navigation';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
+import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import ErrorBoundry from './components/ErrorBoundry';
 
 const particleParams = {
     particles: {
@@ -19,7 +20,7 @@ const particleParams = {
         }
       }
   }
-}
+};
 
 const initialState = {
     input: '',
@@ -34,7 +35,7 @@ const initialState = {
         entries: 0,
         joined: ''
     }
-}
+};
 
 class App extends Component {
   state = initialState;
@@ -135,13 +136,18 @@ class App extends Component {
                 </React.Fragment>
             : (route === 'signIn' 
              ?
+             <ErrorBoundry>
                  <SignIn 
                  loadUser={this.loadUser}
                  onRouteChange={this.onRouteChange}/> 
+             </ErrorBoundry>
               :
+                <ErrorBoundry>
                  <Register 
                  loadUser={this.loadUser}
-                 onRouteChange={this.onRouteChange}/>      
+                 onRouteChange={this.onRouteChange}/>  
+               </ErrorBoundry>
+    
             )     
         }
       </div>
